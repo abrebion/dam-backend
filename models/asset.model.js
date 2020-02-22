@@ -16,13 +16,13 @@ const schema = new Schema(
     public_url: {
       type: String,
       //   required: true,
-      unique: true,
-      trim: true
+      trim: true,
+      default: "default.jpg"
     },
     meta_ean13: {
       type: String,
       unique: true,
-      match: [/\d{13}/, "EAN code is not valid"],
+      match: [/^\d{13}$/, "EAN code is not valid"],
       required: [requiredFieldForProductImage, "EAN13 code is required for product image"]
     },
     meta_brand: {

@@ -8,6 +8,11 @@ const schema = new Schema(
       required: true,
       unique: true,
       trim: true
+    },
+    status: {
+      type: String,
+      required: true,
+      enum: ["active", "inactive"]
     }
   },
   { timestamps: true }

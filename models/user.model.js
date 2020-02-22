@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcryptjs = require("bcryptjs");
 
 const schema = new Schema(
   {
@@ -8,7 +9,7 @@ const schema = new Schema(
       required: true,
       trim: true
     },
-    lasttname: {
+    lastname: {
       type: String,
       required: true,
       trim: true
@@ -44,6 +45,15 @@ const schema = new Schema(
   },
   { timestamps: true }
 );
+
+schema.methods.setPassword = function(password) {
+  this.password = bcryptjs.hashSync(password, 10);
+  return this.password;
+};
+
+schema.methods.validPassword = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
 
 const User = mongoose.model("User", schema);
 
