@@ -27,7 +27,11 @@ var server = http.createServer(app);
  */
 
 app.use(function(req, res, next) {
-  next(createError(404));
+  // next(createError(404));
+  res.status(404).json({
+    status: "404",
+    errorMessage: "Not Found"
+  });
 });
 
 app.use(function(err, req, res, next) {
@@ -102,4 +106,5 @@ function onListening() {
   var addr = server.address();
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
+  console.log("Listening on http://localhost:" + process.env.PORT);
 }
