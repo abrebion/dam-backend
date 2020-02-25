@@ -13,3 +13,5 @@ mongoose
   .catch(error => {
     console.err(`Connection couldn't be established! There was an error: ${error}`);
   });
+
+module.exports = mongoose;

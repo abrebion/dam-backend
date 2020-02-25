@@ -13,21 +13,21 @@ const schema = new Schema(
       enum: ["Product Image", "Logo", "Presentation", "Brand Guideline", "Font"],
       required: true
     },
-    public_url: {
+    url_preview: {
       type: String,
-      //   required: true,
-      trim: true,
+      default: "default.jpg"
+    },
+    url_original: {
+      type: String,
       default: "default.jpg"
     },
     meta_ean13: {
       type: String,
-      unique: true,
       match: [/^\d{13}$/, "EAN code is not valid"],
       required: [requiredFieldForProductImage, "EAN13 code is required for product image"]
     },
     meta_brand: {
       type: String,
-      required: true,
       enum: ["Orangina", "Schweppes", "Oasis", "Oasis O'Verger", "MayTea", "Pulco", "Champomy", "Gini", "Canada Dry", "Pampryl", "Ricqlès", "Brut de Pomme", "Banga"],
       required: [requiredFieldForProductImage, "Brand is required for product image"]
     },
@@ -38,7 +38,6 @@ const schema = new Schema(
     meta_recipe: {
       // Ex: Schweppes Zero
       type: String,
-      required: true,
       required: [requiredFieldForProductImage, "Recipe is required for product image"]
     },
     meta_flavour: {
@@ -68,7 +67,8 @@ const schema = new Schema(
       }
     ],
     meta_file_format: {
-      type: String // ex: .jpg, .png, .psd, .eps and more
+      // ex: .jpg, .png, .psd, .eps and more
+      type: String
     },
     marketing_description_1: {
       type: String,
@@ -107,6 +107,11 @@ const schema = new Schema(
 function requiredFieldForProductImage() {
   return this.type === "Product Image";
 }
+
+// schema.pre("findOneAndDelete", { query: true, document: false }, function(next) {
+//   console.log("Document has been removed");
+//   this.model("Collection").updateMany({ assets: { $in: this._id } }, { $pull: { assets: this._id } }, { multi: true }, next);
+// });
 
 const Asset = mongoose.model("Asset", schema);
 

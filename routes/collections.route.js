@@ -30,6 +30,22 @@ router.post("/", async function(req, res, next) {
   }
 });
 
+router.get("/search", async function(req, res, next) {
+  try {
+    // Construct query object
+    const queryObj = { name: { $regex: req.query.name, $options: "i" } };
+    const collections = await collectionModel.find(queryObj);
+    res.status(200).json({
+      message: "Found collections",
+      data: collections
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error
+    });
+  }
+});
+
 router.get("/:id", async function(req, res, next) {
   try {
     const collection = await collectionModel.findById(req.params.id);

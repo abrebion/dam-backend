@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userModel = require("../models/user.model");
+const collectionModel = require("../models/collection.model");
 
 router.get("/", async function(req, res, next) {
   try {
@@ -54,12 +55,28 @@ router.get("/:id", async function(req, res, next) {
   }
 });
 
+router.get("/:id/collections", async function(req, res, next) {
+  try {
+    const collections = await collectionModel.find({ user: req.params.id });
+    res.status(200).json({
+      message: "Read user collections",
+      data: collections
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error
+    });
+  }
+});
+
 router.delete("/:id", async function(req, res, next) {
   try {
     const user = await userModel.findByIdAndDelete(req.params.id);
+    const collections = await collectionModel.deleteMany({ user: req.params.id });
     res.status(200).json({
-      message: "User deleted",
-      user: user
+      message: "User and his collections were deleted",
+      user: user,
+      collections: collections
     });
   } catch (error) {
     res.status(500).json({

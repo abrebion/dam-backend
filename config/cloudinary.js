@@ -12,7 +12,7 @@ cloudinary.config({
 // Upload file to Cloudinary account
 const storage = cloudinaryStorage({
   cloudinary,
-  folder: "Orangina DAM", // Folder where files will be uploaded
+  folder: "dam", // Folder where files will be uploaded
   allowedFormats: ["jpg", "jpeg", "png", "gif", "pdf", "psd", "eps", "ai"], // To be updated
   params: {
     ressource_type: "raw" // Required if uploading media types other than images (video, audio...)
