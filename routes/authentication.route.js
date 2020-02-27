@@ -64,8 +64,6 @@ router.post("/login", (req, res, next) => {
   })(req, res, next); // IIFE
 });
 
-router.post("/reset-password", (req, res, next) => {});
-
 router.post("/logout", (req, res, next) => {
   req.logout(); // Method provided by passport
   res.status(200).json("Successfully logged out");
