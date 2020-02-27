@@ -18,7 +18,6 @@ router.post("/register", (req, res, next) => {
   if (errorMsg) return res.status(403).json(errorMsg); // 403	Forbidden
 
   const salt = bcryptjs.genSaltSync(10);
-  // more on encryption : https://en.wikipedia.org/wiki/Salt_(cryptography)
   const hashPass = bcryptjs.hashSync(password, salt);
 
   const newUser = {
@@ -31,7 +30,7 @@ router.post("/register", (req, res, next) => {
     .create(newUser)
     .then(newUserFromDB => {
       console.log("newly created user", newUserFromDB);
-      res.status(200).json({ msg: "signup ok" });
+      res.status(200).json({ message: "Registration OK" });
     })
     .catch(err => {
       console.log("signup error", err);
@@ -41,27 +40,17 @@ router.post("/register", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
-    if (err || !user) return res.status(403).json("invalid user infos"); // 403 : Forbidden
-
-    /**
-     * req.Login is a passport method
-     * check the doc here : http://www.passportjs.org/docs/login/
-     */
+    if (err || !user) return res.status(200).json({ status: "error", message: "Invalid user data", err, user });
+    // req.Login is a passport method: http://www.passportjs.org/docs/login/
+    // When the login operation completes, user will be assigned to req.user
     req.logIn(user, function(err) {
-      /* doc says: When the login operation completes, user will be assigned to req.user. */
-      if (err) {
-        return res.json({ message: "Something went wrong logging in" });
-      }
-
-      // We are now logged in
-      // You may find usefull to send some other infos
-      // dont send sensitive informations back to the client
-      // let's choose the exposed user below
-      const { _id, username, email, favorites, avatar, role } = user;
-      // and only expose non-sensitive inofrmations to the client's state
+      if (err) return res.json({ message: "Something went wrong" });
+      // User is now logged in, expose only non sensitive infromation
+      const { _id, firstname, lastname, email, role, status } = user;
       next(
         res.status(200).json({
-          currentUser: {
+          status: "success",
+          user: {
             _id,
             email,
             firstname,
@@ -72,19 +61,19 @@ router.post("/login", (req, res, next) => {
         })
       );
     });
-  })(req, res, next); // IIFE (module) pattern here (see passport documentation)
+  })(req, res, next); // IIFE
 });
 
 router.post("/reset-password", (req, res, next) => {});
 
 router.post("/logout", (req, res, next) => {
-  req.logout(); // method provided by passport
+  req.logout(); // Method provided by passport
   res.status(200).json("Successfully logged out");
 });
 
 router.use("/is-logged-in", (req, res, next) => {
   if (req.isAuthenticated()) {
-    // method provided by passport
+    // Method provided by passport
     const { _id, email, firstname, lastname, role, status } = req.user;
     return res.status(200).json({
       currentUser: {

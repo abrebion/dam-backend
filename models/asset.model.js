@@ -13,6 +13,11 @@ const schema = new Schema(
       enum: ["Product Image", "Logo", "Presentation", "Brand Guideline", "Font"],
       required: true
     },
+    cloudinary_public_id: {
+      type: String
+      // required: true,
+      // unique: true
+    },
     url_preview: {
       type: String,
       default: "default.jpg"
@@ -20,6 +25,20 @@ const schema = new Schema(
     url_original: {
       type: String,
       default: "default.jpg"
+    },
+    meta_file_width: {
+      type: String
+    },
+    meta_file_height: {
+      type: String
+    },
+    meta_file_extension: {
+      // ex: jpg, png, psd, eps and more
+      type: String
+    },
+    meta_file_bytes: {
+      // ex: 350749 = 342Kb
+      type: Number
     },
     meta_ean13: {
       type: String,
@@ -66,10 +85,6 @@ const schema = new Schema(
         ref: "Tag"
       }
     ],
-    meta_file_format: {
-      // ex: .jpg, .png, .psd, .eps and more
-      type: String
-    },
     marketing_description_1: {
       type: String,
       maxlength: 200

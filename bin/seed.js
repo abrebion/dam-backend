@@ -9,10 +9,38 @@ const collectionModel = require("../models/collection.model");
   console.log("Seed database with fake documents...");
 
   const users = [
-    { firstname: "Anthony", lastname: "Brebion", email: "abrebion@gmail.com", password: "12345", role: "admin", status: "active" },
-    { firstname: "Louise", lastname: "Brebion", email: "louise.brebion@suntory.com", password: "12345", role: "editor", status: "active" },
-    { firstname: "Léa", lastname: "Brebion", email: "lea.brebion@gmail.com", password: "12345", role: "user", status: "active" },
-    { firstname: "Maxime", lastname: "Brebion", email: "maxime.brebion@gmail.com", password: "12345", role: "user", status: "on hold" }
+    {
+      firstname: "Anthony",
+      lastname: "Brebion",
+      email: "abrebion@gmail.com",
+      password: "$2a$10$ukDwLka4euhc7OA6a.atm./hVQJK1z0PcD.HYIbbz8RFdCZIzMnT.",
+      role: "admin",
+      status: "active"
+    },
+    {
+      firstname: "Louise",
+      lastname: "Brebion",
+      email: "louise.brebion@suntory.com",
+      password: "$2a$10$ukDwLka4euhc7OA6a.atm./hVQJK1z0PcD.HYIbbz8RFdCZIzMnT.",
+      role: "editor",
+      status: "active"
+    },
+    {
+      firstname: "Léa",
+      lastname: "Brebion",
+      email: "lea.brebion@gmail.com",
+      password: "$2a$10$ukDwLka4euhc7OA6a.atm./hVQJK1z0PcD.HYIbbz8RFdCZIzMnT.",
+      role: "user",
+      status: "active"
+    },
+    {
+      firstname: "Maxime",
+      lastname: "Brebion",
+      email: "maxime.brebion@gmail.com",
+      password: "$2a$10$ukDwLka4euhc7OA6a.atm./hVQJK1z0PcD.HYIbbz8RFdCZIzMnT.",
+      role: "user",
+      status: "on hold"
+    }
   ];
 
   const createdUsers = await userModel.insertMany(users);

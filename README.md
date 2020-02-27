@@ -15,7 +15,7 @@
 - POST /assets/ => Create a new asset
 - GET /assets/:id => Get an asset
 - PATCH /assets/:id => Update an asset
-- DELETE /assets/:id => Delete an asset (should remove the reference in the related collections)
+- DELETE /assets/:id => Delete an asset (should remove the reference in the related collections and delete the file on cloudinary)
 - GET /assets/search => Search for asset(s) based on multiple search parameters passed as URL query parameters. Ex: /assets/search?meta_brand=Orangina,Schweppes&fields=name,url,meta_brand,meta_recipe,meta_flavour,meta_packaging,meta_capacity&sort=-meta_brand&limit=12
 
 ## Tags

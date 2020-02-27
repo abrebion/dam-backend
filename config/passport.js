@@ -13,15 +13,15 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   // This middleware adds user object to req.user
-  // console.log("deserializeUser", id);
+  // console.log("deserializeUser:", id);
   userModel
     .findById(id)
     .then(user => {
-      // console.log("ok : passport.deserializeUser, user found in db ", user);
+      // console.log("passport.deserializeUser OK: user found in database", user);
       done(null, user);
     })
     .catch(err => {
-      // console.log("error: passport.deserializeUser, user NOT fetched from db ");
+      // console.log("passport.deserializeUser NOK, user found in database");
       done(err, null);
     });
 });
@@ -31,14 +31,15 @@ passport.use(
   new localStrategy(
     { usernameField: "email" }, // Change default username credential to email
     function(email, password, next) {
-      // console.log("local strategy", email, passwd);
+      // console.log("Local strategy", email, password);
       userModel
         .findOne({ email: email })
         .then(user => {
-          // console.log("@ LocalStrategy :::: found user in db :", user);
-          if (!user) return next(null, false, "Incorrect login info");
+          // console.log("@LocalStrategy >>> User found in database:", user);
+          if (!user) return next(null, false, "@LocalStrategy >>> Incorrect login info");
           if (!bcryptjs.compareSync(password, user.password)) {
             // Password is not valid
+            // console.log("@LocalStrategy >>> Password is not valid");
             return next(null, false, "Incorrect login info");
           } else next(null, user); // It's all good!
         })
