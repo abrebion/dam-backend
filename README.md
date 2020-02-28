@@ -8,6 +8,9 @@
 - PATCH /users/:id => Update a user
 - DELETE /users/:id => Delete a user (should also delete his collections)
 - GET /users/:id/collections/ => Get all collections from a specific user
+- POST /users/request-access => Create a request access
+- GET /users/request-access/confirm => Create a user with temp access, using URL params to store user details
+- PATCH /users/update-password => Update a user password
 
 ## Assets
 

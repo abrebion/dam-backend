@@ -10,7 +10,7 @@ const schema = new Schema(
     },
     type: {
       type: String,
-      enum: ["Product Image", "Logo", "Presentation", "Brand Guideline", "Font"],
+      enum: ["Product Image", "Logo", "Presentation", "Brand Guideline", "Font", "Video"],
       required: true
     },
     cloudinary_public_id: {
@@ -72,11 +72,12 @@ const schema = new Schema(
     meta_capacity: {
       // Ex: 1.5l, 2l, 33cl, 25cl
       type: String,
+      enum: ["15cl", "25cl", "33cl", "50cl", "1l", "1.5l", "2l"],
       required: [requiredFieldForProductImage, "Capacity (ex: 1.5l) is required for product image"]
     },
     meta_format: {
       type: String,
-      enum: ["Standard", "Lot Gratuité", "Lot Standard"],
+      enum: ["Standard", "Lot Gratuité", "Lot Physique"],
       required: [requiredFieldForProductImage, "Format (ex: Standard, Lot Gratuité) is required for product image"]
     },
     meta_tags: [

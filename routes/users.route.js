@@ -52,15 +52,24 @@ router.post("/request-access", async function(req, res, next) {
       subject: `${firstname} ${lastname} is requesting access`, // Subject line
       html: `
       <strong>${firstname} ${lastname}</strong> (${email}) is requesting access to the DAM.<br>
-      Directly give her/him access, by clicking this <a href="">link</a>.<br>
+      Directly give her/him access, by clicking this <a href="${process.env.BACKEND_URI}/request-access/confirm?firstname=${firstname}&lastname=${lastname}&email=${email}">link</a>.<br>
       He/she will receive an email with a link to set a password and finalize acount setup.
       ` // html body
     });
-    console.log("Message sent: %s", info.messageId);
+    // console.log("Message sent: %s", info.messageId);
     res.status(200).json({
       status: "success",
       message: "Request access has been sent"
     });
+  } catch (error) {
+    res.status(500).json({
+      data: error
+    });
+  }
+});
+
+router.get("/request-access/confirm", async function(req, res, next) {
+  try {
   } catch (error) {
     res.status(500).json({
       data: error
@@ -123,7 +132,7 @@ router.patch("/update-password", async function(req, res, next) {
     }
     const hashedPassword = bcryptjs.hashSync(newPassword, 10);
     const updateUser = await userModel.findByIdAndUpdate(user._id, { password: hashedPassword }, { new: true });
-    return res.json({ status: "success", message: "Current password is correct" });
+    return res.json({ status: "success", message: "Password has been successfully updated" });
   } catch (error) {
     res.status(500).json({
       message: error
