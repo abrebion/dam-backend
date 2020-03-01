@@ -13,24 +13,24 @@ const schema = new Schema(
       enum: ["Product Image", "Logo", "Presentation", "Brand Guideline", "Font", "Video"],
       required: true
     },
-    cloudinary_public_id: {
+    public_id: {
       type: String
       // required: true,
       // unique: true
     },
-    url_preview: {
+    secure_url: {
       type: String,
       default: "default.jpg"
     },
-    url_original: {
+    secure_url_preview: {
       type: String,
       default: "default.jpg"
     },
     meta_file_width: {
-      type: String
+      type: Number
     },
     meta_file_height: {
-      type: String
+      type: Number
     },
     meta_file_extension: {
       // ex: jpg, png, psd, eps and more
