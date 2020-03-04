@@ -60,6 +60,17 @@ router.get("/:id", async function(req, res, next) {
   }
 });
 
+router.get("/:id/assets", async function(req, res, next) {
+  try {
+    const assets = await collectionModel.findById(req.params.id).populate("assets");
+    res.status(200).json(assets);
+  } catch (error) {
+    res.status(500).json({
+      message: error
+    });
+  }
+});
+
 router.delete("/:id", async function(req, res, next) {
   try {
     const collection = await collectionModel.findByIdAndDelete(req.params.id);

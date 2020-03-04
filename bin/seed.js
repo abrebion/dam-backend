@@ -1703,7 +1703,7 @@ const collectionModel = require("../models/collection.model");
       ]
     },
     {
-      name: "Collection #1 Anthony",
+      name: "My First Collection",
       user: createdUsers[0]._id,
       assets: [
         createdAssets[1]._id,
@@ -1717,6 +1717,30 @@ const collectionModel = require("../models/collection.model");
         createdAssets[42]._id,
         createdAssets[49]._id
       ]
+    },
+    {
+      name: "My Second Collection",
+      user: createdUsers[0]._id,
+      assets: [
+        createdAssets[1]._id,
+        createdAssets[2]._id,
+        createdAssets[6]._id,
+        createdAssets[24]._id,
+        createdAssets[32]._id,
+        createdAssets[56]._id,
+        createdAssets[42]._id,
+        createdAssets[49]._id
+      ]
+    },
+    {
+      name: "Champomy Visuals",
+      user: createdUsers[0]._id,
+      assets: [createdAssets[69]._id, createdAssets[70]._id, createdAssets[71]._id, createdAssets[72]._id, createdAssets[73]._id, createdAssets[74]._id]
+    },
+    {
+      name: "Oasis Pomme Cassis Framboise - All References",
+      user: createdUsers[0]._id,
+      assets: [createdAssets[11]._id, createdAssets[12]._id, createdAssets[13]._id, createdAssets[14]._id, createdAssets[15]._id]
     }
   ];
 
