@@ -6,10 +6,7 @@ const assetModel = require("../models/asset.model");
 router.get("/", async function(req, res, next) {
   try {
     const tags = await tagModel.find();
-    res.status(200).json({
-      message: "List of all tags",
-      data: tags
-    });
+    res.status(200).json(tags);
   } catch (error) {
     res.status(500).json({
       message: error

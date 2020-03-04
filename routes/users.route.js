@@ -53,7 +53,7 @@ router.post("/request-access", async function(req, res, next) {
       html: `
       <strong>${firstname} ${lastname}</strong> (${email}) is requesting access to the DAM.<br>
       Directly give her/him access, by clicking this <a href="${process.env.BACKEND_URI}/request-access/confirm?firstname=${firstname}&lastname=${lastname}&email=${email}">link</a>.<br>
-      He/she will receive an email with a link to set a password and finalize acount setup.
+      He/she will receive an email with a link to set a password and finalize account setup.
       ` // html body
     });
     // console.log("Message sent: %s", info.messageId);

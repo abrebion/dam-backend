@@ -72,7 +72,7 @@ const schema = new Schema(
     meta_capacity: {
       // Ex: 1.5l, 2l, 33cl, 25cl
       type: String,
-      enum: ["15cl", "25cl", "33cl", "50cl", "1l", "1.5l", "2l"],
+      enum: ["15cl", "20cl", "25cl", "33cl", "50cl", "75cl", "1l", "1.5l", "2l"],
       required: [requiredFieldForProductImage, "Capacity (ex: 1.5l) is required for product image"]
     },
     meta_format: {
