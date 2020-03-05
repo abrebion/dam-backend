@@ -68,6 +68,28 @@ router.get("/:id/assets", async function(req, res, next) {
   }
 });
 
+router.post("/:id/assets/add", async function(req, res, next) {
+  try {
+    const assets = await collectionModel.findByIdAndUpdate(req.params.id, { $push: { assets: { $each: req.body } } }, { new: true });
+    res.status(200).json(assets);
+  } catch (error) {
+    res.status(500).json({
+      message: error
+    });
+  }
+});
+
+router.post("/:id/assets/delete", async function(req, res, next) {
+  try {
+    const assets = await collectionModel.findByIdAndUpdate(req.params.id, { $pull: { assets: { $in: req.body } } }, { new: true });
+    res.status(200).json(assets);
+  } catch (error) {
+    res.status(500).json({
+      message: error
+    });
+  }
+});
+
 router.delete("/:id", async function(req, res, next) {
   try {
     const collection = await collectionModel.findByIdAndDelete(req.params.id);
