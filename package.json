@@ -2,6 +2,9 @@
   "name": "orangina-dam-backend",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "10.17.0"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www"
